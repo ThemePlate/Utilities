@@ -14,18 +14,26 @@ abstract class HookHandler {
 
 	public function with( string $method ): static {
 
-		$clone = clone $this;
+		if ( method_exists( $this, $method ) ) {
+			$clone = clone $this;
 
-		$clone->handle_with_method = $method;
+			$clone->handle_with_method = $method;
 
-		return $clone;
+			return $clone;
+		}
+
+		return $this;
 
 	}
 
 
 	public function handle(): mixed {
 
-		return call_user_func_array( array( $this, $this->handle_with_method ), func_get_args() );
+		if ( $this->handle_with_method ) {
+			return call_user_func_array( array( $this, $this->handle_with_method ), func_get_args() );
+		}
+
+		return func_get_arg( 0 );
 
 	}
 

@@ -23,6 +23,7 @@
 		"php": "^8.2"
 	},
 	"require-dev": {
+		"psr/log": "^3.0",
 		"themeplate/tester": "^2.2"
 	},
 	"autoload": {

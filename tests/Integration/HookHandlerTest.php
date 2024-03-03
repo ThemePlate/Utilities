@@ -15,6 +15,7 @@ class HookHandlerTest extends WP_UnitTestCase {
 
 		add_filter( 'tester_hook', array( $hook->with( 'add_one' ), 'handle' ) );
 		add_filter( 'tester_hook_once', array( $hook->with( 'add_one' )->once(), 'handle' ) );
+		add_filter( 'tester_hook_priority', array( $hook->with( 'add_one' )->once(), 'handle' ), 911 );
 
 		for ( $i = 1; $i <= 3; $i++ ) {
 			$this->assertEquals( $i + 1, apply_filters( 'tester_hook', $i ) );
@@ -26,6 +27,7 @@ class HookHandlerTest extends WP_UnitTestCase {
 			}
 
 			$this->assertEquals( $value, apply_filters( 'tester_hook_once', $i ) );
+			$this->assertEquals( $value, apply_filters( 'tester_hook_priority', $i ) );
 		}
 	}
 }

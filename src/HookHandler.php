@@ -43,7 +43,19 @@ abstract class HookHandler {
 	public function handle(): mixed {
 
 		if ( $this->run_only_once ) {
-			remove_filter( current_filter(), array( $this, __FUNCTION__ ) );
+			global $wp_filter;
+
+			$id = _wp_filter_build_unique_id( '', array( $this, __FUNCTION__ ), '' );
+
+			$callbacks = array_map( 'array_keys', $wp_filter[ current_filter() ]->callbacks );
+
+			foreach ( $callbacks as $priority => $registered ) {
+				if ( in_array( $id, $registered, true ) ) {
+					break;
+				}
+			}
+
+			remove_filter( current_filter(), array( $this, __FUNCTION__ ), $priority ?? 10 );
 		}
 
 		if ( $this->handle_with_method ) {

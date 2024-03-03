@@ -11,6 +11,8 @@ abstract class HookHandler {
 
 	private string $handle_with_method = '';
 
+	private bool $run_only_once = false;
+
 
 	public function with( string $method ): static {
 
@@ -27,7 +29,22 @@ abstract class HookHandler {
 	}
 
 
+	public function once(): static {
+
+		$clone = clone $this;
+
+		$clone->run_only_once = true;
+
+		return $clone;
+
+	}
+
+
 	public function handle(): mixed {
+
+		if ( $this->run_only_once ) {
+			remove_filter( current_filter(), array( $this, __FUNCTION__ ) );
+		}
 
 		if ( $this->handle_with_method ) {
 			return call_user_func_array( array( $this, $this->handle_with_method ), func_get_args() );

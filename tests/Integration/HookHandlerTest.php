@@ -2,16 +2,20 @@
 
 namespace Tests\Integration;
 
-use ThemePlate\Utilities\HookHandler;
+use Tests\Fixtures\HooksTest;
 use WP_UnitTestCase;
 
 class HookHandlerTest extends WP_UnitTestCase {
+	protected HooksTest $hook;
+
+	protected function setUp(): void {
+		$this->hook = new HooksTest( $this );
+
+		add_filter( 'tester_hook_context', array( $this->hook->with( 'prefixed' ), 'handle' ) );
+	}
+
 	public function test_handling() {
-		$hook = new class() extends HookHandler {
-			public function add_one( $value ) {
-				return $value + 1;
-			}
-		};
+		$hook = $this->hook;
 
 		add_filter( 'tester_hook', array( $hook->with( 'add_one' ), 'handle' ) );
 		add_filter( 'tester_hook_once', array( $hook->with( 'add_one' )->once(), 'handle' ) );
@@ -29,5 +33,8 @@ class HookHandlerTest extends WP_UnitTestCase {
 			$this->assertEquals( $value, apply_filters( 'tester_hook_once', $i ) );
 			$this->assertEquals( $value, apply_filters( 'tester_hook_priority', $i ) );
 		}
+
+		$this->assertStringStartsWith( $this->getName(), apply_filters( 'tester_hook_context', '!' ) );
+		$this->assertSame( $this->getName() . '!', apply_filters( 'tester_hook_context', '!' ) );
 	}
 }

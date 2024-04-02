@@ -27,6 +27,31 @@ class ClassNamesTest extends TestCase {
 		$this->assertIsString( $this->stringer( $this->test ) );
 	}
 
+	public function test_flat(): void {
+		$non_flat = new ClassNames(
+			array(
+				'test' => 'this',
+				'value',
+				'even' => array(
+					'now',
+				),
+				'that' => array(
+					'deep' => array(
+						'nesting' => 'should',
+						'be',
+						'flat',
+					),
+					'last' => 'item',
+				),
+			)
+		);
+
+		$result = $this->stringer( $non_flat );
+
+		$this->assertIsString( $result );
+		$this->assertSame( 'this value now should be flat item', $result );
+	}
+
 	protected function for_utility(): array {
 		return ClassNamesProvider::for_utility();
 	}

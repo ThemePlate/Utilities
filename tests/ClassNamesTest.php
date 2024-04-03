@@ -61,6 +61,15 @@ class ClassNamesTest extends TestCase {
 		$this->asserter( $values, $this->test->utility( $key ) );
 	}
 
+	protected function for_utility_grouped(): array {
+		return ClassNamesProvider::for_utility_grouped();
+	}
+
+	/** @dataProvider for_utility_grouped */
+	public function test_utility_grouped( string $key, array $values ): void {
+		$this->asserter( $values, $this->test->utility( $key, true ) );
+	}
+
 	protected function for_modifier(): array {
 		return ClassNamesProvider::for_modifier();
 	}
@@ -68,5 +77,14 @@ class ClassNamesTest extends TestCase {
 	/** @dataProvider for_modifier() */
 	public function test_modifier( string $key, array $values ): void {
 		$this->asserter( $values, $this->test->modifier( $key ) );
+	}
+
+	protected function for_modifier_grouped(): array {
+		return ClassNamesProvider::for_modifier_grouped();
+	}
+
+	/** @dataProvider for_modifier_grouped() */
+	public function test_modifier_grouped( string $key, array $values ): void {
+		$this->asserter( $values, $this->test->modifier( $key, true ) );
 	}
 }

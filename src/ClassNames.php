@@ -47,16 +47,28 @@ class ClassNames implements Stringable {
 	}
 
 
-	public function utility( string $key ): array {
+	public function utility( string $key, bool $grouped = false ): array {
 
-		return array_values( $this->filter( $key . '-' ) );
+		$values = array_values( $this->filter( $key . '-' ) );
+
+		if ( $grouped ) {
+			$values = $this->group( $values, '/(?P<key>[^:]+):(?P<value>[^-]+-.+)/' );
+		}
+
+		return $values;
 
 	}
 
 
-	public function modifier( string $key ): array {
+	public function modifier( string $key, bool $grouped = false ): array {
 
-		return array_values( $this->filter( $key . ':' ) );
+		$values = array_values( $this->filter( $key . ':' ) );
+
+		if ( $grouped ) {
+			$values = $this->group( $values, '/[^:]+:(?P<value>(?P<key>[^-]+)-.+)/' );
+		}
+
+		return $values;
 
 	}
 
@@ -64,6 +76,25 @@ class ClassNames implements Stringable {
 	public function __toString(): string {
 
 		return implode( ' ', $this->collection );
+
+	}
+
+
+	protected function group( array $collection, string $pattern ): array {
+
+		return array_reduce(
+			$collection,
+			static function ( $carry, $name ) use ( $pattern ) {
+				if ( preg_match( $pattern, $name, $matched ) ) {
+					$carry[ $matched['key'] ][] = $matched['value'];
+				} else {
+					$carry['base'][] = $name;
+				}
+
+				return $carry;
+			},
+			array()
+		);
 
 	}
 

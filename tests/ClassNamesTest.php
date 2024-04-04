@@ -30,18 +30,23 @@ class ClassNamesTest extends TestCase {
 	public function test_flat(): void {
 		$non_flat = new ClassNames(
 			array(
-				'test' => 'this',
+				'keyed' => 'ignored',
 				'value',
-				'even' => array(
-					'now',
+				'array' => array(
+					'bad_condition' => false,
+					'its_important' => true,
+					'wanted_result' => time(),
 				),
-				'that' => array(
-					'deep' => array(
-						'nesting' => 'should',
-						'be',
-						'flat',
+				'deep'  => array(
+					'nested' => array(
+						'evenObject' => $this,
+						'stringable' => new ClassNames( array( 'should', 'be', 'flat' ) ),
+						'mToString'  => new class() {
+							public function __toString(): string {
+								return 'fromString';
+							}
+						},
 					),
-					'last' => 'item',
 				),
 			)
 		);
@@ -49,7 +54,7 @@ class ClassNamesTest extends TestCase {
 		$result = $this->stringer( $non_flat );
 
 		$this->assertIsString( $result );
-		$this->assertSame( 'this value now should be flat item', $result );
+		$this->assertSame( 'keyed value its_important wanted_result evenObject should be flat fromString', $result );
 	}
 
 	protected function for_utility(): array {

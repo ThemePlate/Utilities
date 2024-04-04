@@ -16,26 +16,39 @@ class ClassNames implements Stringable {
 
 	public function __construct( array $collection ) {
 
-		$this->collection = explode( ' ', implode( ' ', $this->flatten( $collection ) ) );
+		$this->collection = $this->process( $collection );
 
 	}
 
 
-	protected function flatten( array $collection ): array {
+	protected function process( array $collection ): array {
 
-		return array_reduce(
-			$collection,
-			function ( $carry, $item ) {
-				if ( is_array( $item ) ) {
-					$carry = array_merge( $carry, $this->flatten( $item ) );
-				} else {
-					$carry[] = $item;
+		$result = array();
+
+		foreach ( $collection as $key => $value ) {
+			if ( is_array( $value ) ) {
+				$result = array_merge( $result, $this->process( $value ) );
+			} else {
+				$temp = $this->parse( $key, $value );
+
+				if ( $temp ) {
+					$result[] = $temp;
 				}
+			}
+		}
 
-				return $carry;
-			},
-			array()
-		);
+		return $result;
+
+	}
+
+
+	protected function parse( string $key, $value ): string {
+
+		if ( is_numeric( $key ) || $value instanceof Stringable ) {
+			return (string) $value;
+		}
+
+		return $value ? $key : '';
 
 	}
 

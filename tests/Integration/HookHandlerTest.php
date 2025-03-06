@@ -34,7 +34,7 @@ class HookHandlerTest extends WP_UnitTestCase {
 			$this->assertEquals( $value, apply_filters( 'tester_hook_priority', $i ) );
 		}
 
-		$this->assertStringStartsWith( $this->getName(), apply_filters( 'tester_hook_context', '!' ) );
-		$this->assertSame( $this->getName() . '!', apply_filters( 'tester_hook_context', '!' ) );
+		$this->assertStringStartsWith( $this->name(), apply_filters( 'tester_hook_context', '!' ) );
+		$this->assertSame( $this->name() . '!', apply_filters( 'tester_hook_context', '!' ) );
 	}
 }

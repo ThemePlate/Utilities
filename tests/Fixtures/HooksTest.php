@@ -19,6 +19,6 @@ class HooksTest extends HookHandler {
 	}
 
 	public function prefixed( $value ) {
-		return $this->context->getName() . $value;
+		return $this->context->name() . $value;
 	}
 }

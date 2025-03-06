@@ -2,6 +2,7 @@
 
 namespace Tests;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use Tests\Fixtures\ClassNamesProvider;
 use ThemePlate\Utilities\ClassNames;
 use PHPUnit\Framework\TestCase;
@@ -57,38 +58,38 @@ class ClassNamesTest extends TestCase {
 		$this->assertSame( 'keyed value its_important wanted_result evenObject should be flat fromString', $result );
 	}
 
-	protected function for_utility(): array {
+	public static function for_utility(): array {
 		return ClassNamesProvider::for_utility();
 	}
 
-	/** @dataProvider for_utility */
+	#[DataProvider( 'for_utility' )]
 	public function test_utility( string $key, array $values ): void {
 		$this->asserter( $values, $this->test->utility( $key ) );
 	}
 
-	protected function for_utility_grouped(): array {
+	public static function for_utility_grouped(): array {
 		return ClassNamesProvider::for_utility_grouped();
 	}
 
-	/** @dataProvider for_utility_grouped */
+	#[DataProvider( 'for_utility_grouped' )]
 	public function test_utility_grouped( string $key, array $values ): void {
 		$this->asserter( $values, $this->test->utility( $key, true ) );
 	}
 
-	protected function for_modifier(): array {
+	public static function for_modifier(): array {
 		return ClassNamesProvider::for_modifier();
 	}
 
-	/** @dataProvider for_modifier() */
+	#[DataProvider( 'for_modifier' )]
 	public function test_modifier( string $key, array $values ): void {
 		$this->asserter( $values, $this->test->modifier( $key ) );
 	}
 
-	protected function for_modifier_grouped(): array {
+	public static function for_modifier_grouped(): array {
 		return ClassNamesProvider::for_modifier_grouped();
 	}
 
-	/** @dataProvider for_modifier_grouped() */
+	#[DataProvider( 'for_modifier_grouped' )]
 	public function test_modifier_grouped( string $key, array $values ): void {
 		$this->asserter( $values, $this->test->modifier( $key, true ) );
 	}

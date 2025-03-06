@@ -8,12 +8,7 @@ use Tests\Integration\HookHandlerTest;
 use ThemePlate\Utilities\HookHandler;
 
 final class HooksTest extends HookHandler {
-	private HookHandlerTest $context;
-
-	public function __construct( HookHandlerTest $context ) {
-
-		$this->context = $context;
-
+	public function __construct( private readonly HookHandlerTest $context ) {
 	}
 
 	public function add_one( $value ): int|float {

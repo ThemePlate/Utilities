@@ -21,13 +21,8 @@ final class ClassNamesTest extends TestCase {
 	}
 
 	protected function asserter( array $expected, array $actual ): void {
-		$this->assertIsArray( $actual );
 		$this->assertEquals( $expected, $actual );
 		$this->assertNotEquals( $this->stringer( $this->test ), $this->stringer( new ClassNames( $actual ) ) );
-	}
-
-	public function test_stringable(): void {
-		$this->assertIsString( $this->stringer( $this->test ) );
 	}
 
 	public function test_flat(): void {
@@ -56,7 +51,6 @@ final class ClassNamesTest extends TestCase {
 
 		$result = $this->stringer( $non_flat );
 
-		$this->assertIsString( $result );
 		$this->assertSame( 'keyed value its_important wanted_result evenObject should be flat fromString', $result );
 	}
 

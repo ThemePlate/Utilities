@@ -8,11 +8,11 @@ use PHPUnit\Framework\TestCase;
 use ThemePlate\Utilities\CanLog;
 
 class CanLogTest extends TestCase {
-	public function test_no_logger() {
+	public function test_no_logger(): void {
 		$class = new class() {
 			use CanLog;
 
-			public function method() {
+			public function method(): true {
 				$this->log( __METHOD__ );
 
 				return true;
@@ -24,7 +24,7 @@ class CanLogTest extends TestCase {
 		$this->assertSame( '', ob_get_clean() );
 	}
 
-	public function test_has_logger() {
+	public function test_has_logger(): void {
 		$logger = new LoggerTest();
 		$class  = new class( $logger ) {
 			use CanLog;
@@ -33,7 +33,7 @@ class CanLogTest extends TestCase {
 				$this->logger = $logger;
 			}
 
-			public function method() {
+			public function method(): true {
 				$this->log( 'YES!' );
 
 				return true;

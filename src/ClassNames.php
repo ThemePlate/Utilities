@@ -5,6 +5,8 @@
  * @since 0.1.0
  */
 
+declare(strict_types=1);
+
 namespace ThemePlate\Utilities;
 
 use Stringable;
@@ -29,7 +31,7 @@ class ClassNames implements Stringable {
 			if ( is_array( $value ) ) {
 				$result = array_merge( $result, $this->process( $value ) );
 			} else {
-				$temp = $this->parse( $key, $value );
+				$temp = $this->parse( (string) $key, $value );
 
 				if ( $temp ) {
 					$result[] = $temp;
@@ -55,7 +57,7 @@ class ClassNames implements Stringable {
 
 	protected function filter( string $identifier ): array {
 
-		return array_filter( $this->collection, fn( $name ) => preg_match( '/' . $identifier . '/', $name ) );
+		return array_filter( $this->collection, fn( $name ): int|false => preg_match( '/' . $identifier . '/', (string) $name ) );
 
 	}
 
@@ -97,7 +99,7 @@ class ClassNames implements Stringable {
 
 		return array_reduce(
 			$collection,
-			static function ( $carry, $name ) use ( $pattern ) {
+			static function ( array $carry, $name ) use ( $pattern ) {
 				if ( preg_match( $pattern, $name, $matched ) ) {
 					$carry[ $matched['key'] ][] = $matched['value'];
 				} else {

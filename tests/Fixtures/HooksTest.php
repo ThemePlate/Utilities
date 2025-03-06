@@ -14,11 +14,11 @@ class HooksTest extends HookHandler {
 
 	}
 
-	public function add_one( $value ) {
+	public function add_one( $value ): int|float {
 		return $value + 1;
 	}
 
-	public function prefixed( $value ) {
+	public function prefixed( string $value ): string {
 		return $this->context->name() . $value;
 	}
 }

@@ -6,9 +6,9 @@ use PHPUnit\Framework\TestCase;
 use ThemePlate\Utilities\HookHandler;
 
 class HookHandlerTest extends TestCase {
-	public function test_handling() {
+	public function test_handling(): void {
 		$hook = new class() extends HookHandler {
-			public function add_one( $value ) {
+			public function add_one( $value ): int|float {
 				return $value + 1;
 			}
 		};

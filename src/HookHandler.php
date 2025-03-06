@@ -5,6 +5,8 @@
  * @since 0.1.0
  */
 
+declare(strict_types=1);
+
 namespace ThemePlate\Utilities;
 
 abstract class HookHandler {
@@ -45,7 +47,7 @@ abstract class HookHandler {
 		if ( $this->run_only_once ) {
 			global $wp_filter;
 
-			$id = _wp_filter_build_unique_id( '', array( $this, __FUNCTION__ ), '' );
+			$id = _wp_filter_build_unique_id( '', array( $this, __FUNCTION__ ), 0 );
 
 			$callbacks = array_map( 'array_keys', $wp_filter[ current_filter() ]->callbacks );
 

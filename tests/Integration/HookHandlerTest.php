@@ -14,7 +14,7 @@ class HookHandlerTest extends WP_UnitTestCase {
 		add_filter( 'tester_hook_context', array( $this->hook->with( 'prefixed' ), 'handle' ) );
 	}
 
-	public function test_handling() {
+	public function test_handling(): void {
 		$hook = $this->hook;
 
 		add_filter( 'tester_hook', array( $hook->with( 'add_one' ), 'handle' ) );

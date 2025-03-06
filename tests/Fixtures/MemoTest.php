@@ -1,10 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\Fixtures;
 
 use ThemePlate\Utilities\CanMemoize;
 
-class MemoTest {
+final class MemoTest {
 	use CanMemoize;
 
 	public function public_method(): string {

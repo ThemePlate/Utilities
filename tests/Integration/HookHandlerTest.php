@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\Integration;
 
 use Tests\Fixtures\HooksTest;
 use WP_UnitTestCase;
 
-class HookHandlerTest extends WP_UnitTestCase {
+final class HookHandlerTest extends WP_UnitTestCase {
 	protected HooksTest $hook;
 
 	protected function setUp(): void {
@@ -21,7 +23,7 @@ class HookHandlerTest extends WP_UnitTestCase {
 		add_filter( 'tester_hook_once', array( $hook->with( 'add_one' )->once(), 'handle' ) );
 		add_filter( 'tester_hook_priority', array( $hook->with( 'add_one' )->once(), 'handle' ), 911 );
 
-		for ( $i = 1; $i <= 3; $i++ ) {
+		for ( $i = 1; $i <= 3; ++$i ) {
 			$this->assertEquals( $i + 1, apply_filters( 'tester_hook', $i ) );
 
 			$value = $i;

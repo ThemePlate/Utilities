@@ -1,10 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\Fixtures;
 
 use ThemePlate\Utilities\Instantiable;
 
-class InstanceTest {
+final class InstanceTest {
 	use Instantiable;
 
 	private string $value;

@@ -1,8 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\Fixtures;
 
-class ClassNamesProvider {
+final class ClassNamesProvider {
 	public const LIST = array(
 		'p-4',
 		'md:p-8',

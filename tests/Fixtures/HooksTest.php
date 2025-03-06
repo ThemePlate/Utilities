@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\Fixtures;
 
 use Tests\Integration\HookHandlerTest;
 use ThemePlate\Utilities\HookHandler;
 
-class HooksTest extends HookHandler {
+final class HooksTest extends HookHandler {
 	private HookHandlerTest $context;
 
 	public function __construct( HookHandlerTest $context ) {

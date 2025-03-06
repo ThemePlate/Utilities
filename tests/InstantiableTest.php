@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests;
 
 use Tests\Fixtures\InstanceTest;
 use PHPUnit\Framework\TestCase;
 
-class InstantiableTest extends TestCase {
+final class InstantiableTest extends TestCase {
 	public function test_instances(): void {
 		$class1 = InstanceTest::instance();
 		$class2 = InstanceTest::instance();

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests;
 
 use PHPUnit\Framework\Attributes\DataProvider;
@@ -7,7 +9,7 @@ use Tests\Fixtures\ClassNamesProvider;
 use ThemePlate\Utilities\ClassNames;
 use PHPUnit\Framework\TestCase;
 
-class ClassNamesTest extends TestCase {
+final class ClassNamesTest extends TestCase {
 	private ClassNames $test;
 
 	protected function setUp(): void {
@@ -15,7 +17,7 @@ class ClassNamesTest extends TestCase {
 	}
 
 	protected function stringer( ClassNames $class_names ): string {
-		return $class_names;
+		return (string) $class_names;
 	}
 
 	protected function asserter( array $expected, array $actual ): void {

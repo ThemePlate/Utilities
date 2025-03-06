@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests;
 
 use Psr\Log\LoggerInterface;
@@ -7,7 +9,7 @@ use Tests\Fixtures\LoggerTest;
 use PHPUnit\Framework\TestCase;
 use ThemePlate\Utilities\CanLog;
 
-class CanLogTest extends TestCase {
+final class CanLogTest extends TestCase {
 	public function test_no_logger(): void {
 		$class = new class() {
 			use CanLog;

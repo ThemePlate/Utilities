@@ -1,10 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\Fixtures;
 
 use Psr\Log\LoggerInterface;
 
-class LoggerTest implements LoggerInterface {
+final class LoggerTest implements LoggerInterface {
 	public array $data = array();
 
 	public function log( $level, string|\Stringable $message, array $context = array() ): void {

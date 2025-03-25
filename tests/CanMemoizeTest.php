@@ -14,6 +14,8 @@ final class CanMemoizeTest extends TestCase {
 		$value = $class->public_method();
 
 		$this->assertEquals( $value, $class->public_method() );
+		$class->reset();
+		$this->assertNotEquals( $value, $class->public_method() );
 		$this->assertEquals( $class->public_method(), $class->public_method() );
 		$this->assertEquals( $class->test( '~', '!!!' ), $class->test( '~', '!!!' ) );
 		$this->assertEquals( $class->test( '@', '---' ), $class->test( '@', '---' ) );

@@ -13,6 +13,10 @@ final class MemoTest {
 		return $this->memoize( 'expensive_method', array( '...', '!' ) );
 	}
 
+	public function reset(): void {
+		$this->unmemoize( 'expensive_method', array( '...', '!' ) );
+	}
+
 	public function test( string $prefix, string $suffix ): string {
 		return $this->memoize( 'expensive_method', array( $prefix, $suffix ) );
 	}

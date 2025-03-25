@@ -35,5 +35,11 @@
 		"psr-4": {
 			"Tests\\": "tests"
 		}
+	},
+	"scripts": {
+		"analyse": "themeplate analyse",
+		"lint": "themeplate lint",
+		"fix": "themeplate fix",
+		"test": "themeplate test"
 	}
 }

@@ -7,7 +7,7 @@ namespace Tests\Fixtures;
 use Psr\Log\LoggerInterface;
 use Stringable;
 
-final class LoggerTest implements LoggerInterface {
+final class LoggerTester implements LoggerInterface {
 	public array $data = array();
 
 	public function log( $level, string|Stringable $message, array $context = array() ): void {

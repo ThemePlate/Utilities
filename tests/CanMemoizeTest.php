@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace Tests;
 
 use PHPUnit\Framework\TestCase;
-use Tests\Fixtures\MemoTest;
+use Tests\Fixtures\MemoTester;
 
 final class CanMemoizeTest extends TestCase {
 	public function test_memoization(): void {
-		$class = new MemoTest();
+		$class = new MemoTester();
 
 		$value = $class->public_method();
 

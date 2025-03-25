@@ -6,7 +6,7 @@ namespace Tests\Fixtures;
 
 use ThemePlate\Utilities\CanMemoize;
 
-final class MemoTest {
+final class MemoTester {
 	use CanMemoize;
 
 	public function public_method(): string {

@@ -6,7 +6,7 @@ namespace Tests\Fixtures;
 
 use ThemePlate\Utilities\Instantiable;
 
-final class InstanceTest {
+final class InstanceTester {
 	use Instantiable;
 
 	private string $value;

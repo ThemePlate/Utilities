@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace Tests;
 
-use Tests\Fixtures\InstanceTest;
+use Tests\Fixtures\InstanceTester;
 use PHPUnit\Framework\TestCase;
 
 final class InstantiableTest extends TestCase {
 	public function test_instances(): void {
-		$class1 = InstanceTest::instance();
-		$class2 = InstanceTest::instance();
+		$class1 = InstanceTester::instance();
+		$class2 = InstanceTester::instance();
 
 		$this->assertSame( $class1, $class2 );
 

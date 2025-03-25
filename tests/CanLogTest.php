@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Tests;
 
 use Psr\Log\LoggerInterface;
-use Tests\Fixtures\LoggerTest;
+use Tests\Fixtures\LoggerTester;
 use PHPUnit\Framework\TestCase;
 use ThemePlate\Utilities\CanLog;
 
@@ -27,7 +27,7 @@ final class CanLogTest extends TestCase {
 	}
 
 	public function test_has_logger(): void {
-		$logger = new LoggerTest();
+		$logger = new LoggerTester();
 		$class  = new class( $logger ) {
 			use CanLog;
 

@@ -7,7 +7,7 @@ namespace Tests\Fixtures;
 use Tests\Integration\HookHandlerTest;
 use ThemePlate\Utilities\HookHandler;
 
-final class HooksTest extends HookHandler {
+final class HooksTester extends HookHandler {
 	public function __construct( private readonly HookHandlerTest $context ) {
 	}
 
